@@ -1,6 +1,7 @@
 const express = require('express');
 const mongoose = require('mongoose');
 const Book = require('./models/book');
+const userRoutes = require('./routes/user');
 
 const app = express();
 
@@ -29,8 +30,6 @@ app.post('/api/books', (req, res, next) => {
         .catch((error) => res.status(400).json({ error }));
 });
 
-app.use((req, res, next) => {
-  res.json({ message: 'Votre serveur Express fonctionne !' });
-});
+app.use('/api/auth', userRoutes);
 
 module.exports = app;
