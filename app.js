@@ -1,5 +1,6 @@
 const express = require('express');
 const mongoose = require('mongoose');
+const Book = require('./models/book');
 
 const app = express();
 
@@ -14,6 +15,18 @@ app.use((req, res, next) => {
   res.setHeader('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content, Accept, Content-Type, Authorization');
   res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, PATCH, OPTIONS');
   next();
+});
+
+// ROUTE POST POUR ENREGISTRER UN LIVRE
+app.post('/api/books', (req, res, next) => {
+    delete req.body._id;
+
+    const book = new Book({
+        ...req.body
+    });
+    book.save()
+        .then(() => res.status(201).json({ message: 'Livre enregistré avec succès !' }))
+        .catch((error) => res.status(400).json({ error }));
 });
 
 app.use((req, res, next) => {
