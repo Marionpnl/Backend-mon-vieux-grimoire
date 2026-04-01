@@ -1,7 +1,7 @@
 const express = require('express');
 const mongoose = require('mongoose');
-const Book = require('./models/book');
 const userRoutes = require('./routes/user');
+const bookRoutes = require('./routes/book');
 
 const app = express();
 
@@ -18,18 +18,7 @@ app.use((req, res, next) => {
   next();
 });
 
-// ROUTE POST POUR ENREGISTRER UN LIVRE
-app.post('/api/books', (req, res, next) => {
-    delete req.body._id;
-
-    const book = new Book({
-        ...req.body
-    });
-    book.save()
-        .then(() => res.status(201).json({ message: 'Livre enregistré avec succès !' }))
-        .catch((error) => res.status(400).json({ error }));
-});
-
 app.use('/api/auth', userRoutes);
+app.use('/api/books', bookRoutes);
 
 module.exports = app;
