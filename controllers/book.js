@@ -1,10 +1,15 @@
 const Book = require('../models/book');
 
 exports.createBook = (req, res, next) => {
-    delete req.body._id;
+    const bookObject = JSON.parse(req.body.book);
+
+    delete bookObject._id; // On supprime l'id envoyé par le client, on va en créer un nouveau avec MongoDB
+    delete bookObject._userId; // On supprime l'userId envoyé par le client, on va le récupérer du token
 
     const book = new Book({
-        ...req.body
+        ...bookObject,
+        userId: req.auth.userId, // On associe le livre à l'utilisateur authentifié
+        imageUrl: req.file ? `${req.protocol}://${req.get('host')}/images/${req.file.filename}` : '' // Si une image a été uploadée, on construit son URL, sinon on laisse vide
     });
     book.save()
         .then(() => res.status(201).json({ message: 'Livre enregistré avec succès !' }))
