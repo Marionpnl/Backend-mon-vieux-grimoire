@@ -8,7 +8,7 @@ module.exports = (req, res, next) => {
             throw new Error('No token provided');
         }
 
-        const decodedToken = jwt.verify(token, 'RANDOM_SECRET_KEY');
+        const decodedToken = jwt.verify(token, process.env.JWT_SECRET);
         const userId = decodedToken.userId;
         req.auth = { userId: userId };
         next();
