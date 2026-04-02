@@ -9,6 +9,8 @@ router.post('/', auth, multer, sharp, bookCtrl.createBook); // Privé (il faut �
 
 router.get('/', bookCtrl.getAllBooks); // Public
 
+router.get('/bestrating', bookCtrl.getBestBooks); // Public
+
 router.get('/:id', bookCtrl.getOneBook); // Public
 
 router.put('/:id', auth, multer, sharp, bookCtrl.modifyBook); // Privé
