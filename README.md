@@ -24,7 +24,8 @@ Ce projet constitue le back-end du site de notation de livres "Mon Vieux Grimoir
     npm install
 
 3. **Configurer les variables d'environnement**
-Créez un fichier .env à la racine du dossier et ajoutez les variables suivantes:
+
+Créez un fichier **.env** à la racine du dossier et ajoutez les variables suivantes:
     ```Plaintext
     PORT=4000
     MONGO_URL=votre_lien_mongodb_atlas
@@ -32,12 +33,10 @@ Créez un fichier .env à la racine du dossier et ajoutez les variables suivante
 
 4. **Lancer le serveur**
     ```Bash
-    # Mode développement (recommandé) :
-    # Utilise nodemon pour redémarrer le serveur à chaque modification
+    # Mode développement (recommandé) : Utilise nodemon pour redémarrer le serveur à chaque modification
     npm run dev
 
-    # Mode production :
-    # Lancement classique via Node.js
+    # Mode production : Lancement classique via Node.js
     npm start
 
 ## Fonctionnalités clés

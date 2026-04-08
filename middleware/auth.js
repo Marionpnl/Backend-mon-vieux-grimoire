@@ -5,7 +5,7 @@ module.exports = (req, res, next) => {
         const token = req.headers.authorization ? req.headers.authorization.split(' ')[1] : null;
 
         if (!token) {
-            throw new Error('No token provided');
+            throw new Error('Pas de token fourni');
         }
 
         const decodedToken = jwt.verify(token, process.env.JWT_SECRET);
